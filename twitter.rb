@@ -1,5 +1,6 @@
 require 'twitter'
 require 'yaml'
+require 'pry'
 
 class TwitterApi
   attr_reader :client
@@ -16,18 +17,23 @@ class TwitterApi
 
 
   def most_recent_friend
+    client.friends.first
+    
     #find the twitter gem method that retrieves a user's friends and grab the most recent friend
   end
 
-  def find_user_for(username)
-    #find the twitter gem method that returns the correct user, given a username
+  def find_user_for(screen_name)
+    client.user(screen_name)
+    #find the twitter gem method that returns the correct user, given a screen_name
   end
 
-  def find_followers_for(username)
+  def find_followers_for(screen_name)
+    client.followers(screen_name).take(10)
     #find the twitter gem method that returns the follows of a given user
   end
 
   def homepage_timeline
+    client.home_timeline
     #find the twitter gem method that retreives the tweets from a user's timeline.
   end
   
